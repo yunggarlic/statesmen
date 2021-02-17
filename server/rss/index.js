@@ -1,0 +1,16 @@
+const router = require('express').Router();
+const Parser = require('rss-parser');
+const parser = new Parser();
+
+router.get('/', async (req, res, next) => {
+  try {
+    const { items: episodeList } = await parser.parseURL(
+      'https://statesmen.libsyn.com/rss'
+    );
+    res.send(episodeList);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+module.exports = router;
