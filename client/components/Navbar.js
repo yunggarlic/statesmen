@@ -1,23 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
+import { Link, Box, AppBar } from '@material-ui/core';
 
 const Navbar = () => {
   return (
-    <nav>
-      <div className="navbar">
-        <Link to="/home">
+    <AppBar>
+      <Box className="navbar">
+        <Link component={RouterLink} to="/home">
           <h1>STATESMEN!</h1>
         </Link>
         <span>
-          <Link className="nav-link" to="/home">
+          <Link component={RouterLink} to="/home">
             Episodes
           </Link>
-          <Link className="nav-link" to="/about">
+          <Link component={RouterLink} to="/about">
             About
           </Link>
         </span>
-      </div>
-    </nav>
+      </Box>
+      </AppBar>
   );
 };
 

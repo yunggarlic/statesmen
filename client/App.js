@@ -1,15 +1,14 @@
 import { BrowserRouter as Router } from 'react-router-dom';
-import React from 'react'
+import React from 'react';
 import { Routes, Navbar } from './components';
+import { Box } from '@material-ui/core';
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Navbar />
-        <Routes />
-      </Router>
-    </div>
+    <Router>
+      <Navbar className="navbar" />
+      <Routes />
+    </Router>
   );
 }
 
