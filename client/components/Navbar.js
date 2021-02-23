@@ -1,24 +1,29 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Link, Box, AppBar } from '@material-ui/core';
+import { Button, Box, AppBar, Toolbar, Grid } from '@material-ui/core';
 
 const Navbar = () => {
   return (
-    <AppBar>
-      <Box className="navbar">
-        <Link component={RouterLink} to="/home">
-          <h1>STATESMEN!</h1>
-        </Link>
-        <span>
-          <Link component={RouterLink} to="/home">
-            Episodes
-          </Link>
-          <Link component={RouterLink} to="/about">
-            About
-          </Link>
-        </span>
-      </Box>
-      </AppBar>
+    <AppBar position="static">
+      <Toolbar>
+        <Grid container direction="row" justify="space-around" alignItems="center">
+          <Button component={RouterLink} to="/home">
+            <h1>STATESMEN!</h1>
+          </Button>
+          <Grid>
+            <Button size="large" component={RouterLink} to="/map">
+              Map
+            </Button>
+            <Button size="large" component={RouterLink} to="/home">
+              Episodes
+            </Button>
+            <Button size="large" component={RouterLink} to="/about">
+              About
+            </Button>
+          </Grid>
+        </Grid>
+      </Toolbar>
+    </AppBar>
   );
 };
 
