@@ -43,14 +43,6 @@ const EpisodeList = () => {
         count={Math.ceil(episodes.length / 10)}
         onChange={handlePageChange}
       />
-
-      {/* <DataGrid pageSize={5} rowsPerPageOptions={[5,10,20]} pagination {...episodes.map((episode) => (
-            <EpisodeListItem
-              key={`${episode.itunes.season}${episode.itunes.episode}`}
-              id={`${episode.itunes.season}${episode.itunes.episode}`}
-              episode={episode}
-            />
-          ))}/> */}
     </Container>
   );
 };
