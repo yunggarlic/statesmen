@@ -1,15 +1,20 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Map, EpisodeList } from './index';
-import { Box } from '@material-ui/core';
+import { Map, EpisodeList, SingleEpisode } from './index';
+import { Container } from '@material-ui/core';
+
 const Routes = () => {
   return (
-    <Switch>
+    <Container>
+      <Switch>
         <Route exact path="/about"></Route>
         <Route exact path="/map" component={Map} />
+        <Route exact path="/:id">
+          <SingleEpisode />
+        </Route>
         <Route path="/" component={EpisodeList} />
-    </Switch>
-
+      </Switch>
+    </Container>
   );
 };
 

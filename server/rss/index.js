@@ -13,4 +13,13 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.get('/:idx', async (req, res, next) => {
+  try{
+    const {items: episodeList } = await parser.parseURL('https://statesmen.libsyn.com/rss');
+    res.send(episodeList[req.params.idx])
+  }catch(error){
+    console.error(error)
+  }
+});
+
 module.exports = router;
