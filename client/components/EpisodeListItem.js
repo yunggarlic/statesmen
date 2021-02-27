@@ -2,17 +2,32 @@ import React from 'react';
 import {
   makeStyles,
   Card,
-  CardHeader,
   CardContent,
   CardActions,
   CardActionArea,
   Typography,
-  Box,
   Button,
 } from '@material-ui/core';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    height: 250,
+  },
+  actionArea: {
+    height: 250,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  button: {
+    alignSelf: 'flex-end'
+  }
+}));
+
 const EpisodeListItem = (props) => {
+  const classes = useStyles();
   const {
     episode: { title, contentSnippet, pubDate, itunes },
     idx,
@@ -23,11 +38,12 @@ const EpisodeListItem = (props) => {
   };
   return (
     <Card
+      className={classes.root}
       onClick={() => {
         redirect(idx);
       }}
     >
-      <CardActionArea>
+      <CardActionArea className={classes.actionArea}>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {title}
@@ -40,8 +56,12 @@ const EpisodeListItem = (props) => {
             Released: {pubDate.slice(0, 16)}
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button component={RouterLink} to={`/${idx}`} size="small">
+        <CardActions className={classes.button}>
+          <Button
+            component={RouterLink}
+            to={`/${idx}`}
+            size="small"
+          >
             Read More
           </Button>
         </CardActions>

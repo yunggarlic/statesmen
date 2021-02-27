@@ -31,15 +31,16 @@ const useStyles = makeStyles({
 
 const SingleEpisode = (props) => {
   const [episode, setEpisode] = useState({});
-  const { id } = useParams();
+  const { idx } = useParams();
+  console.log(idx)
   const classes = useStyles();
 
   useEffect(() => {
     const fetchEpisode = async (id) => {
-      const { data: episode } = await axios.get(`/rss/${id}`);
+      const { data: episode } = await axios.get(`/rss/${idx}`);
       setEpisode(episode);
     };
-    fetchEpisode(id);
+    fetchEpisode(idx);
   }, []);
 
   return (

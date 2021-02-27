@@ -6,33 +6,35 @@ import {
   Paper,
   Container,
   LinearProgress,
+  Button,
   makeStyles,
 } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
+  button: {
+    margin: '5px',
   },
   pagination: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  seeAll: {
+    alignSelf: 'right',
   },
 }));
 
 const EpisodeList = () => {
   const [episodes, setEpisodes] = useState([]);
   const [allEpisodes, setAllEpisodes] = useState([]);
+  console.log(allEpisodes)
   const [usState, setUsState] = useState('all');
   const [page, setPage] = useState(1);
   const [pageEpisodes, setPageEpisodes] = useState([]);
-  const classes = useStyles;
+  const classes = useStyles();
 
   useEffect(() => {
     const fetchEpisodes = async () => {
@@ -57,18 +59,38 @@ const EpisodeList = () => {
 
     const stateEpisodeList = episodeTitleList
       .map((title, idx) => {
+        let prefix = false;
         return [
           title.filter((word, wordIdx) => {
             if (
               word === 'New' ||
               word === 'South' ||
               word === 'North' ||
-              word === 'West'
+              word === 'West' ||
+              word === 'Rhode'
             ) {
+              prefix = true;
               const newWord = `${word} ${title[wordIdx + 1]}`;
-              return newWord === stateName;
+              if (newWord === stateName) {
+                return true;
+              }
             } else {
-              return word === stateName;
+              if (prefix === false) {
+                if (
+                  stateName === 'Virginia' &&
+                  word === 'Washington' &&
+                  title[wordIdx + 1] === 'DC'
+                ) {
+                  return true;
+                } else if (
+                  stateName === 'Washington' &&
+                  title[wordIdx + 1] === 'DC'
+                ) {
+                  return false;
+                } else {
+                  return word === stateName;
+                }
+              }
             }
           }),
           idx,
@@ -86,11 +108,25 @@ const EpisodeList = () => {
   };
 
   return (
-    <Container>
-      <Map handleClick={handleStateClick} />
+    <Container className={classes.root}>
+      <Map
+        handleClick={handleStateClick}
+        selected={usState}
+        className={classes.seeAll}
+      />
+      <Button
+        className={classes.button}
+        onClick={() => {
+          setEpisodes(allEpisodes);
+          setPageEpisodes(allEpisodes.slice(0, 10));
+          setUsState('all');
+        }}
+      >
+        Show All States
+      </Button>
       <Grid container spacing={3} alignItems="center" alignContent="center">
         {episodes ? (
-          pageEpisodes.map((episode, idx) => (
+          pageEpisodes.map((episode) => (
             <Grid
               item
               xs={6}
@@ -98,7 +134,7 @@ const EpisodeList = () => {
             >
               <EpisodeListItem
                 id={`${episode.itunes.season}${episode.itunes.episode}`}
-                idx={idx}
+                idx={episode.idx}
                 episode={episode}
               />
             </Grid>
@@ -112,7 +148,6 @@ const EpisodeList = () => {
         page={page}
         count={Math.ceil(episodes.length / 10)}
         onChange={handlePageChange}
-        size="large"
       />
     </Container>
   );

@@ -7,6 +7,7 @@ router.get('/', async (req, res, next) => {
     const { items: episodeList } = await parser.parseURL(
       'https://statesmen.libsyn.com/rss'
     );
+    episodeList.forEach((episode, idx) => episode.idx = idx)
     res.send(episodeList);
   } catch (error) {
     console.error(error);

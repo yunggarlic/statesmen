@@ -20,7 +20,7 @@ function App() {
       >
         <Navbar />
         <Routes />
-        <Footer />
+        {/* <Footer /> */}
       </Container>
     </Router>
   );
