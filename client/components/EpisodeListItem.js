@@ -2,55 +2,70 @@ import React from 'react';
 import {
   makeStyles,
   Card,
-  CardHeader,
   CardContent,
   CardActions,
+  CardActionArea,
   Typography,
-  Box,
   Button,
 } from '@material-ui/core';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 400,
-    margin: '5px',
+    height: 250,
   },
-  episodeItem: {
-    //transform: 'scale(0.8)',
+  actionArea: {
+    height: 250,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-between'
   },
-});
+  button: {
+    alignSelf: 'flex-end'
+  }
+}));
 
 const EpisodeListItem = (props) => {
   const classes = useStyles();
   const {
     episode: { title, contentSnippet, pubDate, itunes },
+    idx,
   } = props;
+  let history = useHistory();
+  const redirect = (path) => {
+    history.push(`/episode/${path}`);
+  };
   return (
-    <Card className={classes.root}>
-      <CardHeader
-        action={
-          <Typography className={classes.title} variant="h6" component="h4">
+    <Card
+      className={classes.root}
+      onClick={() => {
+        redirect(idx);
+      }}
+    >
+      <CardActionArea className={classes.actionArea}>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
             {title}
-          </Typography>
-        }
-      ></CardHeader>
-      <CardContent>
-        <Box className={classes.episodeItem}>
-          <Typography variant="body1" component="h4">
-            Summary:
           </Typography>
           <Typography variant="body2" component="p">{`${contentSnippet.slice(
             0,
             350
           )}...`}</Typography>
-        </Box>
-        <Typography variant="overline">
-          Released: {pubDate.slice(0, 16)}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Read More</Button>
-      </CardActions>
+          <Typography variant="overline">
+            Released: {pubDate.slice(0, 16)}
+          </Typography>
+        </CardContent>
+        <CardActions className={classes.button}>
+          <Button
+            component={RouterLink}
+            to={`/episode/${idx}`}
+            size="small"
+          >
+            Read More
+          </Button>
+        </CardActions>
+      </CardActionArea>
     </Card>
   );
 };
