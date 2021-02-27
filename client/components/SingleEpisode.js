@@ -14,6 +14,8 @@ import axios from 'axios';
 const useStyles = makeStyles({
   root: {
     display: 'flex',
+    flexDirection: 'column',
+    alignItems: "center",
   },
   audioPlayer: {
     maxWidth: '50rem',
@@ -23,6 +25,7 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    width: '60rem'
   },
   episodeSummary: {
     margin: '1rem',
@@ -47,7 +50,7 @@ const SingleEpisode = (props) => {
     <Container className={classes.root}>
       {Object.keys(episode).length > 0 ? (
         <Card className={classes.episodeCard}>
-          <Typography>{`${episode.title}`}</Typography>
+          <Typography variant="h4">{`${episode.title}`}</Typography>
           <CardMedia
             className={classes.audioPlayer}
             component="audio"

@@ -34,7 +34,7 @@ const EpisodeListItem = (props) => {
   } = props;
   let history = useHistory();
   const redirect = (path) => {
-    history.push(`/${path}`);
+    history.push(`/episode/${path}`);
   };
   return (
     <Card
@@ -59,7 +59,7 @@ const EpisodeListItem = (props) => {
         <CardActions className={classes.button}>
           <Button
             component={RouterLink}
-            to={`/${idx}`}
+            to={`/episode/${idx}`}
             size="small"
           >
             Read More

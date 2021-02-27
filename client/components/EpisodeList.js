@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
 const EpisodeList = () => {
   const [episodes, setEpisodes] = useState([]);
   const [allEpisodes, setAllEpisodes] = useState([]);
-  console.log(allEpisodes)
   const [usState, setUsState] = useState('all');
   const [page, setPage] = useState(1);
   const [pageEpisodes, setPageEpisodes] = useState([]);

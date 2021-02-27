@@ -16,7 +16,7 @@ const Routes = () => {
       <Switch>
         <Route exact path="/about"></Route>
         <Route exact path="/map" component={Map} />
-        <Route exact path="/:idx">
+        <Route exact path="/episode/:idx">
           <SingleEpisode />
         </Route>
         <Route path="/" component={EpisodeList} />

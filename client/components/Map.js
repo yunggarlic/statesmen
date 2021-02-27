@@ -13,8 +13,6 @@ const useStyles = makeStyles((theme) => ({
 const Map = (props) => {
   const { handleClick, selected } = props;
   const classes = useStyles();
-  console.log(stateMap[1].name);
-  console.log(selected===stateMap[1].name)
   return (
     <Container className={classes.root}>
       <svg viewBox="-100 -50 1080 650">
