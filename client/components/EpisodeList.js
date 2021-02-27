@@ -51,55 +51,28 @@ const EpisodeList = () => {
   };
 
   const handleStateClick = (e) => {
-    const stateName = e.target.attributes.name.value;
-    const episodeTitleList = allEpisodes.map((episode) => {
-      return episode.title.replace(/[^\w\s]/gi, '').split(' ');
-    });
-
-    const stateEpisodeList = episodeTitleList
-      .map((title, idx) => {
-        let prefix = false;
+    const stateName = e.target.attributes.name.value
+      .replace(/[\s]/gi, '')
+      .toLowerCase();
+    const stateEpisodeIndexes = allEpisodes
+      .map((episode, idx) => {
         return [
-          title.filter((word, wordIdx) => {
-            if (
-              word === 'New' ||
-              word === 'South' ||
-              word === 'North' ||
-              word === 'West' ||
-              word === 'Rhode'
-            ) {
-              prefix = true;
-              const newWord = `${word} ${title[wordIdx + 1]}`;
-              if (newWord === stateName) {
+          idx,
+          episode.itunes.keywords
+            .split(',')
+            .sort()
+            .filter((keyword) => {
+              if (stateName === 'virginia' && keyword === 'dc') {
                 return true;
               }
-            } else {
-              if (prefix === false) {
-                if (
-                  stateName === 'Virginia' &&
-                  word === 'Washington' &&
-                  title[wordIdx + 1] === 'DC'
-                ) {
-                  return true;
-                } else if (
-                  stateName === 'Washington' &&
-                  title[wordIdx + 1] === 'DC'
-                ) {
-                  return false;
-                } else {
-                  return word === stateName;
-                }
-              }
-            }
-          }),
-          idx,
+              return keyword === stateName;
+            }),
         ];
       })
-      .filter((list) => list[0].length > 0);
-
+      .filter((episode) => episode[1].length > 0);
     const stateEpisodes = [];
-    stateEpisodeList.forEach((episode) => {
-      stateEpisodes.push(allEpisodes[episode[1]]);
+    stateEpisodeIndexes.forEach((episode) => {
+      stateEpisodes.push(allEpisodes[episode[0]]);
     });
     setPageEpisodes(stateEpisodes.slice(0, 10));
     setEpisodes(stateEpisodes);
