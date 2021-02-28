@@ -1,11 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Container,
   Paper,
   Zoom,
   Typography,
+  Button,
   makeStyles,
 } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,13 +23,22 @@ const useStyles = makeStyles((theme) => ({
   contact: {
     marginTop: '5rem',
   },
+  body: {
+    display: 'flex',
+    flexDirection: 'column'
+  }
 }));
 
 const About = () => {
   const [loaded, setLoaded] = useState(false);
   const classes = useStyles();
+  const history = useHistory();
 
-  useEffect(() => setLoaded(true), [])
+  useEffect(() => setLoaded(true), []);
+
+  const handleClick = () => {
+    history.push('/');
+  };
 
   return (
     <Container className={classes.root}>
@@ -48,6 +59,7 @@ const About = () => {
             <Typography className={classes.contact}>
               Contact Us: statesmenpodcast@gmail.com
             </Typography>
+            <Button className={classes.root} onClick={handleClick}>Back to Episode Map</Button>
           </Container>
         </Paper>
       </Zoom>
