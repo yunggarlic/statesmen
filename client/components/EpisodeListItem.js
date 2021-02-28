@@ -3,10 +3,9 @@ import {
   makeStyles,
   Card,
   CardContent,
-  CardActions,
+  Container,
   CardActionArea,
   Typography,
-  Button,
 } from '@material-ui/core';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 
@@ -15,17 +14,18 @@ const useStyles = makeStyles((theme) => ({
     height: 250,
   },
   actionArea: {
+    height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-between'
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
   },
   button: {
-    alignSelf: 'flex-end'
+    alignSelf: 'flex-end',
   },
   cardContent: {
-    justifyContent: 'space-between'
-  }
+    justifyContent: 'space-between',
+  },
 }));
 
 const EpisodeListItem = (props) => {
@@ -50,14 +50,16 @@ const EpisodeListItem = (props) => {
           <Typography gutterBottom variant="h5" component="h2">
             {title}
           </Typography>
-          <Typography variant="body2" component="p">{`${contentSnippet.slice(
+          <Typography variant="body2" component="p">{contentSnippet.length > 350 ? `${contentSnippet.slice(
             0,
-            350
-          )}...`}</Typography>
+            500
+          )}...` : contentSnippet}</Typography>
+        </CardContent>
+        <Container>
           <Typography variant="overline">
             Released: {pubDate.slice(0, 16)}
           </Typography>
-        </CardContent>
+        </Container>
       </CardActionArea>
     </Card>
   );
