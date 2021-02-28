@@ -127,7 +127,7 @@ const EpisodeList = () => {
           className={classes.button}
           onClick={(e) => handleStateClick(e, 'special')}
         >
-          Specials
+          Show All Specials
         </Button>
       </Container>
       <Grid container spacing={3} alignItems="center" alignContent="center">

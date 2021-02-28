@@ -17,16 +17,21 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   title: {
-    marginTop: '2rem',
-    marginBottom: '5rem',
+    marginTop: '1rem',
+    marginBottom: '2rem',
   },
   contact: {
-    marginTop: '5rem',
+    marginTop: '1rem',
+    paddingLeft: 0,
+    display: 'flex',
+    flexDirection: 'column',
+    flexWrap: 'wrap',
+    alignItems: 'flex-start',
   },
   body: {
     display: 'flex',
-    flexDirection: 'column'
-  }
+    flexDirection: 'column',
+  },
 }));
 
 const About = () => {
@@ -44,7 +49,7 @@ const About = () => {
     <Container className={classes.root}>
       <Zoom in={loaded} unmountOnExit>
         <Paper className={classes.paper}>
-          <img src="/Statesmen2Square.jpg" width="500" height="500"></img>
+          <img src="/Statesmen2Square.jpg" width="560" height="560"></img>
           <Container className={classes.body}>
             <Typography className={classes.title} variant="h3" component="h1">
               About? This isn't BOXING!
@@ -52,14 +57,30 @@ const About = () => {
             <Typography variant="h5">
               Statesmen is a comedy podcast hosted and created by Chicago
               comedians Anthony Rossi, Stuart Hicar, and Tim Ferrari. The show
-              is produced by Camden Stacey. Every Tuesday, we invite a guest
-              comedian to explore their home state through the lens of the five
-              senses.
+              and its music are arranged and produced by Camden Stacey. Every
+              Tuesday, we invite a guest comedian to explore their home state
+              through the lens of the five senses.
             </Typography>
-            <Typography className={classes.contact}>
-              Contact Us: statesmenpodcast@gmail.com
-            </Typography>
-            <Button className={classes.root} onClick={handleClick}>Back to Episode Map</Button>
+            <Container className={classes.contact}>
+              <Typography align="center" variant="h6">
+                Contact Us!
+              </Typography>
+              <Button href="mailto:statesmenpodcast@gmail.com">
+                Email: statesmenpodcast@gmail.com
+              </Button>
+              <Button href="https://twitter.com/statesmenpod">
+                Twitter: @statesmenpod
+              </Button>
+              <Button href="https://www.facebook.com/statesmenpodcast">
+                Facebook: @statesmenpodcast
+              </Button>
+              <Button href="https://www.instagram.com/statesmenpodcast">
+                Instagram: @statesmenpodcast
+              </Button>
+            </Container>
+            <Button className={classes.root} onClick={handleClick}>
+              Back to Episode Map
+            </Button>
           </Container>
         </Paper>
       </Zoom>

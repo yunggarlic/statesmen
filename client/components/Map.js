@@ -16,7 +16,7 @@ const Map = (props) => {
   const classes = useStyles();
   return (
     <Container className={classes.root}>
-      <svg viewBox="-100 -50 1080 650">
+      <svg viewBox="0 0 1080 625">
         {stateMap.map((stateData) => {
           return (
             <Slide key={stateData.id} in={loaded} mountOnEnter unmountOnExit>
