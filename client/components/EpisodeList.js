@@ -100,7 +100,9 @@ const EpisodeList = () => {
 
   return (
     <Container className={classes.root}>
-      <Typography variant="h2">Exploring all fifty states with the five senses</Typography>
+      <Typography align="center" variant="h2">
+        Exploring all fifty states with the five senses
+      </Typography>
       <Map
         handleClick={handleStateClick}
         selected={usState}

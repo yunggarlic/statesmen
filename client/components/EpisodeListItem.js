@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
     height: 250,
   },
   actionArea: {
-    height: 250,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -23,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     alignSelf: 'flex-end'
+  },
+  cardContent: {
+    justifyContent: 'space-between'
   }
 }));
 
@@ -44,7 +46,7 @@ const EpisodeListItem = (props) => {
       }}
     >
       <CardActionArea className={classes.actionArea}>
-        <CardContent>
+        <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2">
             {title}
           </Typography>
@@ -56,15 +58,6 @@ const EpisodeListItem = (props) => {
             Released: {pubDate.slice(0, 16)}
           </Typography>
         </CardContent>
-        <CardActions className={classes.button}>
-          <Button
-            component={RouterLink}
-            to={`/episode/${idx}`}
-            size="small"
-          >
-            Read More
-          </Button>
-        </CardActions>
       </CardActionArea>
     </Card>
   );
