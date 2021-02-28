@@ -1,25 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Map, EpisodeList, SingleEpisode } from './index';
-import { Container, makeStyles } from '@material-ui/core';
+import { Map, EpisodeList, SingleEpisode, Footer, About } from './index';
+import { Container, makeStyles, Zoom } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: '2rem'
-  }
-}))
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    // justifyContent: 'space-between'
+  },
+  footer: {
+    position: 'fixed',
+    bottom: 0,
+    width: '100%',
+  },
+}));
 
 const Routes = () => {
-  const classes = useStyles()
+  const classes = useStyles();
   return (
     <Container className={classes.root}>
       <Switch>
-        <Route exact path="/about"></Route>
-        <Route exact path="/map" component={Map} />
+        <Route exact path="/about" component={About} />
         <Route exact path="/episode/:idx">
           <SingleEpisode />
         </Route>
-        <Route path="/" component={EpisodeList} />
+        <Route path="/">
+          <EpisodeList />
+          <Footer className={classes.footer} />
+        </Route>
       </Switch>
     </Container>
   );
