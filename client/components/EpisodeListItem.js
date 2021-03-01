@@ -52,7 +52,7 @@ const EpisodeListItem = (props) => {
           </Typography>
           <Typography variant="body2" component="p">{contentSnippet.length > 350 ? `${contentSnippet.slice(
             0,
-            500
+            300
           )}...` : contentSnippet}</Typography>
         </CardContent>
         <Container>
