@@ -45,7 +45,7 @@ const SingleEpisode = (props) => {
   const classes = useStyles();
 
   useEffect(() => {
-    const fetchEpisode = async (id) => {
+    const fetchEpisode = async (idx) => {
       const { data: episode } = await axios.get(`/rss/${idx}`);
       setEpisode(episode);
       setLoaded(true);
