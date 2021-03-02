@@ -17,7 +17,10 @@ router.get('/', async (req, res, next) => {
         const { items: episodeList } = await parser.parseURL(
           'https://statesmen.libsyn.com/rss'
         );
-        episodeList.forEach((episode, idx) => (episode.idx = idx));
+        episodeList.forEach((episode, idx) => {
+          episode.idx = idx;
+          client.setex(idx, 14400, JSON.stringify(episode));
+        });
         client.setex('all', 14400, JSON.stringify(episodeList));
       }
     });
