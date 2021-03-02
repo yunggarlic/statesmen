@@ -13,7 +13,6 @@ router.get('/', async (req, res, next) => {
       if (episodeList) {
         res.status(200).send(JSON.parse(episodeList));
       } else {
-        console.log('hello');
         const { items: episodeList } = await parser.parseURL(
           'https://statesmen.libsyn.com/rss'
         );

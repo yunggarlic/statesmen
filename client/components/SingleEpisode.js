@@ -41,7 +41,6 @@ const SingleEpisode = (props) => {
   const [episode, setEpisode] = useState({});
   const [loaded, setLoaded] = useState(false);
   const { idx } = useParams();
-  console.log(episode);
   const classes = useStyles();
 
   useEffect(() => {
