@@ -21,6 +21,7 @@ router.get('/', async (req, res, next) => {
           client.setex(idx, 14400, JSON.stringify(episode));
         });
         client.setex('all', 14400, JSON.stringify(episodeList));
+        res.status(200).send(episodeList);
       }
     });
   } catch (error) {
