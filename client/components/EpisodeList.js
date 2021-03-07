@@ -5,7 +5,7 @@ import {
   Grid,
   Typography,
   Container,
-  LinearProgress,
+  CircularProgress,
   Button,
   Zoom,
   makeStyles,
@@ -25,6 +25,11 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: '5px',
+  },
+  grid: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   pagination: {
     display: 'flex',
@@ -53,9 +58,9 @@ const EpisodeList = () => {
       setAllEpisodes(data);
       setEpisodes(data);
       setPageEpisodes(data.slice(0, 10));
+      setLoaded(true);
     };
     fetchEpisodes();
-    setLoaded(true);
   }, []);
 
   const handlePageChange = (e, currentPage) => {
@@ -130,27 +135,29 @@ const EpisodeList = () => {
           Show All Specials
         </Button>
       </Container>
-      <Grid container spacing={3} alignItems="center" alignContent="center">
+      <Container className={classes.grid}>
         {loaded ? (
-          pageEpisodes.map((episode) => (
-            <Zoom
-              in={loaded}
-              style={{ transitionDelay: loaded ? '200ms' : '0ms' }}
-              key={`${episode.itunes.season}${episode.itunes.episode}`}
-            >
-              <Grid item xs={6}>
-                <EpisodeListItem
-                  id={`${episode.itunes.season}${episode.itunes.episode}`}
-                  idx={episode.idx}
-                  episode={episode}
-                />
-              </Grid>
-            </Zoom>
-          ))
+          <Grid container spacing={3} alignItems="center" alignContent="center">
+            {pageEpisodes.map((episode) => (
+              <Zoom
+                in={loaded}
+                style={{ transitionDelay: loaded ? '200ms' : '0ms' }}
+                key={`${episode.itunes.season}${episode.itunes.episode}`}
+              >
+                <Grid item xs={6}>
+                  <EpisodeListItem
+                    id={`${episode.itunes.season}${episode.itunes.episode}`}
+                    idx={episode.idx}
+                    episode={episode}
+                  />
+                </Grid>
+              </Zoom>
+            ))}
+          </Grid>
         ) : (
-          <LinearProgress />
+          <CircularProgress />
         )}
-      </Grid>
+      </Container>
       <Zoom in={loaded} style={{ transitionDelay: loaded ? '0ms' : '0ms' }}>
         <Pagination
           className={classes.pagination}
