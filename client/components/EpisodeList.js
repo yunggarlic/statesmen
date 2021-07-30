@@ -85,7 +85,7 @@ const EpisodeList = () => {
               .sort()
               .filter((keyword) => {
                 return (
-                  keyword === stateName ||
+                  keyword.toLowerCase() === stateName ||
                   (stateName === 'virginia' && keyword === 'dc')
                 );
               }),
