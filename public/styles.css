@@ -1,4 +1,13 @@
-html{
+html {
   scroll-behavior: smooth;
   height: 100%;
+}
+
+button.active {
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+button > span {
+  z-index: -1;
 }

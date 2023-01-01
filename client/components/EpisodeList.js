@@ -19,9 +19,13 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     minHeight: '80rem',
   },
+  header: {
+    margin: '20px 0',
+  },
   buttonContainer: {
     display: 'flex',
     justifyContent: 'center',
+    marginBottom: '10px',
   },
   button: {
     margin: '5px',
@@ -70,7 +74,18 @@ const EpisodeList = () => {
     setLoaded(true);
   };
 
+  const handleButtonState = (e) => {
+    const buttons = document.querySelectorAll('button.active');
+    buttons.forEach((button) => {
+      button.classList.remove('active');
+    });
+    if (e) e.target.classList.add('active');
+  };
+
   const handleStateClick = (e, special) => {
+    //removes active class from all buttons by passing in no parameter
+    if (!special) handleButtonState();
+
     const stateName =
       special ||
       e.target.attributes.name.value.replace(/[\s]/gi, '').toLowerCase();
@@ -99,13 +114,13 @@ const EpisodeList = () => {
       setPageEpisodes(stateEpisodes.slice(0, 10));
       setEpisodes(stateEpisodes);
       setUsState(stateName);
-      setTimeout(() => setLoaded(true), 200);
+      setTimeout(() => setLoaded(true), 550);
     }
   };
 
   return (
     <Container className={classes.root}>
-      <Typography align="center" variant="h2">
+      <Typography align="center" variant="h2" className={classes.header}>
         Exploring all fifty states with the five senses
       </Typography>
       <Map
@@ -115,14 +130,15 @@ const EpisodeList = () => {
       />
       <Container className={classes.buttonContainer}>
         <Button
-          className={classes.button}
-          onClick={() => {
+          className={`${classes.button} active`}
+          onClick={(e) => {
+            handleButtonState(e);
             if (usState !== 'all') {
               setLoaded(false);
               setEpisodes(allEpisodes);
               setPageEpisodes(allEpisodes.slice(0, 10));
               setUsState('all');
-              setTimeout(() => setLoaded(true), 200);
+              setTimeout(() => setLoaded(true), 550);
             }
           }}
         >
@@ -130,7 +146,10 @@ const EpisodeList = () => {
         </Button>
         <Button
           className={classes.button}
-          onClick={(e) => handleStateClick(e, 'special')}
+          onClick={(e) => {
+            handleButtonState(e);
+            handleStateClick(e, 'special');
+          }}
         >
           Show All Specials
         </Button>
@@ -158,14 +177,21 @@ const EpisodeList = () => {
           <CircularProgress />
         )}
       </Container>
-      <Zoom in={loaded} style={{ transitionDelay: loaded ? '0ms' : '0ms' }}>
-        <Pagination
-          className={classes.pagination}
-          page={page}
-          count={Math.ceil(episodes.length / 10)}
-          onChange={handlePageChange}
-        />
-      </Zoom>
+      {loaded ? (
+        <Zoom
+          in={loaded}
+          style={{ margin: '15px 0', transitionDelay: loaded ? '0ms' : '0ms' }}
+        >
+          <Pagination
+            className={classes.pagination}
+            page={page}
+            count={Math.ceil(episodes.length / 10)}
+            onChange={handlePageChange}
+          />
+        </Zoom>
+      ) : (
+        <></>
+      )}
     </Container>
   );
 };

@@ -7,6 +7,7 @@ import stateMap from './utils/stateMap';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '45rem',
+    marginBottom: '15px',
   },
 }));
 
